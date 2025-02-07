@@ -1,0 +1,85 @@
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+#wrap {
+    margin-top: 3px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1%;
+    background-color: rgb(240, 255, 244);
+    margin-right: 2%;
+    margin-left: 2%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#wrap input {
+    border-radius: 5px;
+    width: 80%;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 15px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+
+#botoes, #saida {
+    margin-top: 3px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1%;
+    background-color: rgb(240, 255, 244);
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+button {
+    width: 30%;
+    height: 35px;
+    background-color: rgb(0, 95, 139);
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0077b6;
+    transform: scale(1.05);
+}
+
+#saida input {
+    height: 20px;
+    width: 20px;
+}
+
+table {
+    width: 100%;
+    border: solid black;
+    border-radius: 10px;
+    background-color: rgb(0, 95, 139);
+    color: white;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid white;
+}
+
+td {
+    border-radius: 10px;
+}
+
+tr:hover {
+    background-color: #ffeb3b;
+    color: black;
+}

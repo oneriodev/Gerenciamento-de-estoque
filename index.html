@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Produtos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Gerenciador de Produtos</h1>
+
+    <div id="wrap">
+        <input type="text" id="nome" placeholder="Nome do produto">
+        <input type="number" id="quantidade" placeholder="Quantidade">
+        <input type="number" id="preco" placeholder="Preço">
+        <input type="text" id="descricao" placeholder="Descrição">
+
+        <h2>Dimensões (metros)</h2>
+        <input type="number" id="largura" placeholder="Largura">
+        <input type="number" id="profundidade" placeholder="Profundidade">
+        <input type="number" id="altura" placeholder="Altura">
+    </div>
+
+    <div id="botoes">
+        <button id="btnEnviar">Adicionar</button>
+        <button id="btnExcluir">Excluir</button>
+        <button id="btnEditar">Editar</button>
+    </div>
+
+    <div id="saida">
+        <table>
+            <tr>
+                <td width="30px"></td>
+                <td>Nome</td>
+                <td>Quant.</td>
+                <td>Preço</td>
+                <td>Largura</td>
+                <td>Profundidade</td>
+                <td>Altura</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

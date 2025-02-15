@@ -18,6 +18,10 @@ def init_db():
             largura REAL,
             profundidade REAL,
             altura REAL,
+            area_m2 REAL,
+            volume_m3 REAL,
+            vlr_m2 REAL,
+            tipo TEXT,
             data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
@@ -52,13 +56,17 @@ def add_produto():
     largura = float(data.get('largura', 0))
     profundidade = float(data.get('profundidade', 0))
     altura = float(data.get('altura', 0))
+    area_m2 = largura * profundidade
+    volume_m3 = largura * profundidade * altura
+    vlr_m2 = float(data.get('vlr_m2', 0))
+    tipo = data.get('tipo', '')
 
     conn = get_db_connection()
     c = conn.cursor()
     c.execute('''
-        INSERT INTO produtos (nome, quantidade, preco, descricao, largura, profundidade, altura)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    ''', (data['nome'], data['quantidade'], preco, data.get('descricao', ''), largura, profundidade, altura))
+        INSERT INTO produtos (nome, quantidade, preco, descricao, largura, profundidade, altura, area_m2, volume_m3, vlr_m2, tipo)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (data['nome'], data['quantidade'], preco, data.get('descricao', ''), largura, profundidade, altura, area_m2, volume_m3, vlr_m2, tipo))
     conn.commit()
     id_produto = c.lastrowid
     conn.close()
@@ -76,6 +84,10 @@ def update_produto(id):
     largura = float(data.get('largura', 0))
     profundidade = float(data.get('profundidade', 0))
     altura = float(data.get('altura', 0))
+    area_m2 = largura * profundidade
+    volume_m3 = largura * profundidade * altura
+    vlr_m2 = float(data.get('vlr_m2', 0))
+    tipo = data.get('tipo', '')
 
     conn = get_db_connection()
     c = conn.cursor()
@@ -88,9 +100,9 @@ def update_produto(id):
     
     c.execute('''
         UPDATE produtos
-        SET nome=?, quantidade=?, preco=?, descricao=?, largura=?, profundidade=?, altura=?
+        SET nome=?, quantidade=?, preco=?, descricao=?, largura=?, profundidade=?, altura=?, area_m2=?, volume_m3=?, vlr_m2=?, tipo=?
         WHERE id=?
-    ''', (data['nome'], data['quantidade'], preco, data.get('descricao', ''), largura, profundidade, altura, id))
+    ''', (data['nome'], data['quantidade'], preco, data.get('descricao', ''), largura, profundidade, altura, area_m2, volume_m3, vlr_m2, tipo, id))
     
     conn.commit()
     conn.close()

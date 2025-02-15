@@ -3,45 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Produtos</title>
+    <title>Cadastro de Clientes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <h1>Gerenciador de Produtos</h1>
-
+    <h1>Cadastro de Clientes</h1>
     <div id="wrap">
-        <input type="text" id="nome" placeholder="Nome do produto">
+        <input type="text" id="nome" placeholder="Nome do cliente">
         <input type="number" id="quantidade" placeholder="Quantidade">
         <input type="number" id="preco" placeholder="Preço">
+        <input type="number" id="vlr_m2" placeholder="Vlr/M²">
+        <input type="text" id="tipo" placeholder="Tipo">
         <input type="text" id="descricao" placeholder="Descrição">
 
         <h2>Dimensões (metros)</h2>
         <input type="number" id="largura" placeholder="Largura">
         <input type="number" id="profundidade" placeholder="Profundidade">
         <input type="number" id="altura" placeholder="Altura">
+        <input type="number" id="area_m2" placeholder="Área M²">
+        <input type="number" id="volume_m3" placeholder="Volume M³">
     </div>
 
     <div id="botoes">
         <button id="btnEnviar">Adicionar</button>
-        <button id="btnExcluir">Excluir</button>
-        <button id="btnEditar">Editar</button>
+        <button id="btnConsultar" onclick="window.location.href='consultar.html'">Consultar</button>
     </div>
 
     <div id="saida">
-        <table>
-            <tr>
-                <td width="30px"></td>
-                <td>Nome</td>
-                <td>Quant.</td>
-                <td>Preço</td>
-                <td>Largura</td>
-                <td>Profundidade</td>
-                <td>Altura</td>
-            </tr>
-        </table>
+        <!-- A parte da tabela foi removida conforme solicitado -->
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Produtos</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #botoesAcao {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .botoes-container {
+            display: flex;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Consulta de Produtos</h1>
+
+    <div id="botoesAcao">
+        <div class="botoes-container">
+            <button id="btnEditar" onclick="editarProduto()">Editar</button>
+            <button id="btnExcluir" onclick="excluirProduto()">Excluir</button>
+        </div>
+    </div>
+    
+    <div id="saida">
+        <table>
+            <tr>
+                <td width="30px"></td>
+                <td>Nome</td>
+                <td>Quant.</td>
+                <td>Preço</td>
+                <td>Largura</td>
+                <td>Profundidade</td>
+                <td>Altura</td>
+                <td>Área M²</td>
+                <td>Volume M³</td>
+                <td>Vlr/M²</td>
+                <td>Tipo</td>
+                <td>Descrição</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="botoes">
+        <button id="btnVoltar" onclick="window.location.href='index.html'">Voltar</button>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000';
+
+        async function carregarProdutos() {
+            try {
+                const response = await fetch(`${API_URL}/produtos`);
+                const produtos = await response.json();
+                
+                const tabela = document.querySelector('#saida table');
+                while (tabela.rows.length > 1) {
+                    tabela.deleteRow(1);
+                }
+
+                produtos.forEach(produto => {
+                    const row = tabela.insertRow();
+                    row.innerHTML = ` 
+                        <td><input type="radio" name="selecao" value="${produto.id}"></td>
+                        <td>${produto.nome}</td>
+                        <td>${produto.quantidade}</td>
+                        <td>R$ ${produto.preco.toFixed(2)}</td>
+                        <td>${produto.largura || ''}</td>
+                        <td>${produto.profundidade || ''}</td>
+                        <td>${produto.altura || ''}</td>
+                        <td>${produto.area_m2 || ''}</td>
+                        <td>${produto.volume_m3 || ''}</td>
+                        <td>${produto.vlr_m2 || ''}</td>
+                        <td>${produto.tipo || ''}</td>
+                        <td>${produto.descricao || ''}</td>
+                    `;
+                });
+            } catch (error) {
+                console.error('Erro ao carregar produtos:', error);
+            }
+        }
+
+        function obterProdutoSelecionado() {
+            const selecionado = document.querySelector('input[name="selecao"]:checked');
+            return selecionado ? selecionado.value : null;
+        }
+
+        function editarProduto() {
+            const produtoId = obterProdutoSelecionado();
+            if (produtoId) {
+                window.location.href = `editar.html?id=${produtoId}`;
+            } else {
+                alert('Selecione um produto para editar.');
+            }
+        }
+
+        async function excluirProduto() {
+            const produtoId = obterProdutoSelecionado();
+            if (produtoId) {
+                const confirmacao = confirm('Tem certeza que deseja excluir este produto?');
+                if (confirmacao) {
+                    try {
+                        await fetch(`${API_URL}/produtos/${produtoId}`, {
+                            method: 'DELETE'
+                        });
+                        alert('Produto excluído com sucesso!');
+                        carregarProdutos();
+                    } catch (error) {
+                        console.error('Erro ao excluir produto:', error);
+                    }
+                }
+            } else {
+                alert('Selecione um produto para excluir.');
+            }
+        }
+
+        carregarProdutos();
+    </script>
+
+</body>
+</html>
